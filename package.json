@@ -1,0 +1,10 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "louisheeren <louis.heeren@student.howest.be>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.25.1"
+  }
+}

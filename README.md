@@ -23,3 +23,12 @@ Let echter op: er kunnen ook onschuldige burgers voorbijlopen. Deze mogen niet v
 ## Controls
 
 - Mouse-control (de user mikt met zijn muis naar links of rechts (= mousemove) en kan schieten door te klikken (click)).
+
+
+## MVP
+
+Er komen vierkanten langs beide kanten op het canvas, op willekeurige momenten, naar het midden toe. Daar zal zich een cirkel bevinden die kan schieten. De kogels worden afgevuurd naar de richting waar de muis zich bevindt. 
+
+Wanneer de kogels de vierkanten raken, verdwijnen de vierkanten. 
+
+Wanneer de vierkanten de cirkel raken, is het spel afgelopen.

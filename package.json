@@ -1,0 +1,19 @@
+{
+  "name": "Pablo_Escobar",
+  "version": "1.0.0",
+  "description": "Pablo Escobar is a endless game",
+  "main": "index.js",
+  "author": "Louis Heerenand Denis Aerts",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }, 
+  "scripts": {
+    "production": "webpack",
+    "development": "NODE_ENV=development webpack --watch"
+  }
+}

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Pablo Escobar is a endless game",
   "main": "index.js",
-  "author": "Louis Heerenand Denis Aerts",
+  "author": "Louis Heeren and Denis Aerts",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.5",

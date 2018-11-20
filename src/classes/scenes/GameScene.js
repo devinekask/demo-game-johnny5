@@ -6,6 +6,7 @@ let pablo;
 let bullet;
 let reticle;
 let polices;
+let police;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -19,7 +20,6 @@ export default class GameScene extends Phaser.Scene {
   preload() {}
 
   create() {
-    console.log(`In de Create van de GameScene`);
     this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
@@ -27,7 +27,6 @@ export default class GameScene extends Phaser.Scene {
     );
     this.createPablo();
     this.createBullet();
-    this.createPolice();
   }
 
   createPablo() {
@@ -46,7 +45,6 @@ export default class GameScene extends Phaser.Scene {
         //this.score ++;
         const mousex = this.input.mousePointer.x;
         const mousey = this.input.mousePointer.y;
-        console.log(this.input.mousePointer.x);
         let bulletAngle = this.pablo.rotation;
 
         bulletAngle = Phaser.Math.Angle.Between(
@@ -73,8 +71,37 @@ export default class GameScene extends Phaser.Scene {
   }
 
   createPolice() {
-    this.police = new Police(this, 200, 300);
+    if (Math.random() < 0.5) {
+      const police = new Police(
+        this,
+        this.sys.game.config.width,
+        this.sys.game.config.height - 68
+      );
+      const rect = new Phaser.Geom.Rectangle(
+        this.sys.game.config.width / 2,
+        this.sys.game.config.height - 68,
+        1,
+        1
+      );
+      return police;
+    } else {
+      const police = new Police(this, 0, this.sys.game.config.height - 68);
+      const rect = new Phaser.Geom.Rectangle(
+        this.sys.game.config.width / 2,
+        this.sys.game.config.height - 68,
+        1,
+        1
+      );
+      return police;
+    }
+    this.physics.moveToObject(police, rect, 200);
   }
 
-  update() {}
+  update() {
+    const number = Math.random();
+    if (number < 0.02) {
+      console.log('Enemy created');
+      this.createPolice();
+    }
+  }
 }

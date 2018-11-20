@@ -70,12 +70,13 @@ export default class GameScene extends Phaser.Scene {
     );
   }
 
-  createPolice() {
-    if (Math.random() < 0.5) {
+  createPolice(number) {
+    if (this.number < 0.5) {
       const police = new Police(
         this,
         this.sys.game.config.width,
-        this.sys.game.config.height - 68
+        this.sys.game.config.height - 68,
+        this.number
       );
       const rect = new Phaser.Geom.Rectangle(
         this.sys.game.config.width / 2,
@@ -83,25 +84,30 @@ export default class GameScene extends Phaser.Scene {
         1,
         1
       );
-      return police;
+      this.physics.moveToObject(police, rect, 200);
     } else {
-      const police = new Police(this, 0, this.sys.game.config.height - 68);
+      const police = new Police(
+        this,
+        0,
+        this.sys.game.config.height - 68,
+        this.number
+      );
       const rect = new Phaser.Geom.Rectangle(
         this.sys.game.config.width / 2,
         this.sys.game.config.height - 68,
         1,
         1
       );
-      return police;
+      this.physics.moveToObject(police, rect, 200);
     }
-    this.physics.moveToObject(police, rect, 200);
   }
 
   update() {
-    const number = Math.random();
-    if (number < 0.02) {
+    this.number = Math.random();
+    const numberone = Math.random();
+    if (numberone < 0.02) {
       console.log('Enemy created');
-      this.createPolice();
+      this.createPolice(this.number);
     }
   }
 }

@@ -1,0 +1,7 @@
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: color(var(--textColor) lightness(50%));
+  font-variant-caps: small-caps;
+  position: relative;
+}

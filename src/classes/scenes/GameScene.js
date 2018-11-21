@@ -106,7 +106,7 @@ export default class GameScene extends Phaser.Scene {
     //
     this.physics.moveToObject(this.police, rect, 100);
 
-    this.physics.add.overlap(
+    this.physics.add.collider(
       this.pablo,
       polices,
       this.gameOverScreen,null,this
@@ -129,7 +129,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   endPolice(bulletSprite, policeSprite) {
-    console.log('Dead');
     polices.splice(policeSprite);
     policeSprite.destroy();
     bulletSprite.destroy();

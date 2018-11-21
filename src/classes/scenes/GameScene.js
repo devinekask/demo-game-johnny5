@@ -7,6 +7,8 @@ const bullets = [];
 let reticle;
 const polices = [];
 let police;
+let score;
+let scoreTextField;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -27,6 +29,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.createPablo();
     this.createBullet();
+    this.createScore();
   }
 
   createPablo() {
@@ -68,6 +71,14 @@ export default class GameScene extends Phaser.Scene {
     );
   }
 
+  createScore() {
+    scoreTextField = this.add.text(16, 16, `Score: 0`, {
+      fontSize: `32px`,
+      fill: `#000`
+    });
+    score = 0;
+  }
+
   createPolice(number) {
     if (this.number < 0.5) {
       this.police = new Police(
@@ -102,7 +113,7 @@ export default class GameScene extends Phaser.Scene {
   endGame() {
     console.log('GAME OVER');
     this.gameOver = true;
-    this.start('boot');
+    //this.start('boot');
     this.physics.pause();
   }
 
@@ -111,6 +122,9 @@ export default class GameScene extends Phaser.Scene {
     polices.splice(policeSprite);
     policeSprite.destroy();
     bulletSprite.destroy();
+    score += 10;
+    scoreTextField.setText(`Score: ${score}`);
+    console.log(this.score);
   }
 
   update() {

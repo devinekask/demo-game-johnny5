@@ -3,7 +3,7 @@ import Bullet from '../gameobjects/Bullet.js';
 import Police from '../gameobjects/Police.js';
 
 let pablo;
-let bullet;
+const bullets = [];
 let reticle;
 const polices = [];
 let police;
@@ -27,8 +27,6 @@ export default class GameScene extends Phaser.Scene {
     );
     this.createPablo();
     this.createBullet();
-
-    //this.physics.add.overlap(this.pablo, this.polices, this.endGame);
   }
 
   createPablo() {
@@ -55,17 +53,16 @@ export default class GameScene extends Phaser.Scene {
           mousey
         );
 
-        const bullet = new Bullet(
+        this.bullet = new Bullet(
           this,
           this.sys.game.config.width / 2,
           this.sys.game.config.height - 100
         );
-
+        bullets.push(this.bullet);
         const rect = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
 
-        this.physics.moveToObject(bullet, rect, 350);
-
-        bullet.rotation = bulletAngle + - 0.1;
+        this.physics.moveToObject(this.bullet, rect, 350);
+        this.bullet.rotation = bulletAngle + - 0.1;
       },
       this
     );
@@ -88,22 +85,32 @@ export default class GameScene extends Phaser.Scene {
       );
     }
     polices.push(this.police);
-
+    //
     const rect = new Phaser.Geom.Rectangle(
-      this.sys.game.config.width / 2,
+      this.sys.game.config.width / 2 - 30,
       this.sys.game.config.height - 68,
-      1,
+      10,
       1
     );
-
-    this.physics.moveToObject(this.police, rect, 200);
+    //
+    this.physics.moveToObject(this.police, rect, 100);
 
     this.physics.add.overlap(this.pablo, polices, this.endGame);
+    this.physics.add.collider(bullets, this.police, this.endPolice);
   }
 
   endGame() {
     console.log('GAME OVER');
     this.gameOver = true;
+    this.start('boot');
+    this.physics.pause();
+  }
+
+  endPolice(bulletSprite, policeSprite) {
+    console.log('Dead');
+    polices.splice(policeSprite);
+    policeSprite.destroy();
+    bulletSprite.destroy();
   }
 
   update() {

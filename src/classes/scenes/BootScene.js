@@ -1,20 +1,34 @@
-export default class BootScene extends Phaser.Scene{
-  constructor(){
+import './../../assets/btn.png';
+import './../../assets/titlescreen.png';
+
+export default class BootScene extends Phaser.Scene {
+  constructor() {
     super({
       key: `boot`
     });
     console.log(`In de Bootscene`);
   }
-  preload(){
+  preload() {
     console.log(`preload van de bootscene`);
-    //Maybe load a preloader graphic...
+    this.load.image(`titlescreen`, `./assets/titlescreen.png`);
+    this.load.image(`button`, `./assets/btn.png`);
   }
-  create(){
-    console.log(`create van de bootscene`);
-    this.scene.start(`preload`);
-  }
-  update(){
+  create() {
+    this.btn = this.add.image(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height / 2,
+      `titlescreen`
+    );
+    this.input.once(
+      'pointerdown',
+      function() {
+        console.log('click');
 
+        this.scene.start('preload');
+      },
+      this
+    );
   }
 
+  update() {}
 }

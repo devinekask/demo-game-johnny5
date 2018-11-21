@@ -5,11 +5,11 @@ export default class Police extends Phaser.GameObjects.Image {
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
+    this.setScale(0.08);
     //
     if (number < 0.5) {
-      this.setScale(0.08);
     } else {
-      this.setScale(- 0.08, 0.08);
+      this.flipX = true;
     }
   }
 }

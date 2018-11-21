@@ -5,7 +5,7 @@ import Police from '../gameobjects/Police.js';
 let pablo;
 let bullet;
 let reticle;
-let polices;
+const polices = [];
 let police;
 
 export default class GameScene extends Phaser.Scene {
@@ -27,6 +27,8 @@ export default class GameScene extends Phaser.Scene {
     );
     this.createPablo();
     this.createBullet();
+
+    //this.physics.add.overlap(this.pablo, this.polices, this.endGame);
   }
 
   createPablo() {
@@ -35,7 +37,6 @@ export default class GameScene extends Phaser.Scene {
       this.sys.game.config.width / 2,
       this.sys.game.config.height
     );
-    this.physics.add.collider(this.pablo, this.platforms);
   }
 
   createBullet() {
@@ -72,34 +73,37 @@ export default class GameScene extends Phaser.Scene {
 
   createPolice(number) {
     if (this.number < 0.5) {
-      const police = new Police(
+      this.police = new Police(
         this,
         this.sys.game.config.width,
         this.sys.game.config.height - 68,
         this.number
       );
-      const rect = new Phaser.Geom.Rectangle(
-        this.sys.game.config.width / 2,
-        this.sys.game.config.height - 68,
-        1,
-        1
-      );
-      this.physics.moveToObject(police, rect, 200);
     } else {
-      const police = new Police(
+      this.police = new Police(
         this,
         0,
         this.sys.game.config.height - 68,
         this.number
       );
-      const rect = new Phaser.Geom.Rectangle(
-        this.sys.game.config.width / 2,
-        this.sys.game.config.height - 68,
-        1,
-        1
-      );
-      this.physics.moveToObject(police, rect, 200);
     }
+    polices.push(this.police);
+
+    const rect = new Phaser.Geom.Rectangle(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height - 68,
+      1,
+      1
+    );
+
+    this.physics.moveToObject(this.police, rect, 200);
+
+    this.physics.add.overlap(this.pablo, polices, this.endGame);
+  }
+
+  endGame() {
+    console.log('GAME OVER');
+    this.gameOver = true;
   }
 
   update() {
@@ -109,5 +113,6 @@ export default class GameScene extends Phaser.Scene {
       console.log('Enemy created');
       this.createPolice(this.number);
     }
+    console.log(polices.length);
   }
 }

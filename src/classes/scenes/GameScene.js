@@ -98,23 +98,34 @@ export default class GameScene extends Phaser.Scene {
     polices.push(this.police);
     //
     const rect = new Phaser.Geom.Rectangle(
-      this.sys.game.config.width / 2 - 30,
+      this.sys.game.config.width / 2,
       this.sys.game.config.height - 68,
-      10,
+      1,
       1
     );
     //
     this.physics.moveToObject(this.police, rect, 100);
 
-    this.physics.add.overlap(this.pablo, polices, this.endGame);
-    this.physics.add.collider(bullets, this.police, this.endPolice);
+    this.physics.add.overlap(
+      this.pablo,
+      polices,
+      this.gameOverScreen,null,this
+    );
+    this.physics.add.collider(bullets, this.police, this.endPolice, null, this);
   }
 
-  endGame() {
-    console.log('GAME OVER');
-    this.gameOver = true;
-    //this.start('boot');
+  gameOverScreen() {
+    console.log('gameover');
     this.physics.pause();
+    this.gameOver = true;
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x171717, 0.5);
+    overlay.fillRect(
+      0,
+      0,
+      this.sys.game.config.width,
+      this.sys.game.config.height
+    );
   }
 
   endPolice(bulletSprite, policeSprite) {
@@ -128,12 +139,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.number = Math.random();
-    const numberone = Math.random();
-    if (numberone < 0.02) {
-      console.log('Enemy created');
-      this.createPolice(this.number);
+    if (!this.gameOver) {
+      this.number = Math.random();
+      const numberone = Math.random();
+      if (numberone < 0.02) {
+        console.log('Enemy created');
+        this.createPolice(this.number);
+      }
+      console.log(polices.length);
     }
-    console.log(polices.length);
   }
 }

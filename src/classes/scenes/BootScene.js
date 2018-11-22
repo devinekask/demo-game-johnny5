@@ -10,14 +10,19 @@ export default class BootScene extends Phaser.Scene {
   }
   preload() {
     console.log(`preload van de bootscene`);
-    this.load.image(`titlescreen`, `./assets/titlescreen.png`);
+    this.load.image(`bg`, `./assets/titlescreen.png`);
     this.load.image(`button`, `./assets/btn.png`);
   }
   create() {
-    this.btn = this.add.image(
+    this.bg = this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
-      `titlescreen`
+      `bg`
+    );
+    this.btn = this.add.image(
+      this.sys.game.config.width / 2,
+      500,
+      `button`
     );
     this.input.once(
       'pointerdown',

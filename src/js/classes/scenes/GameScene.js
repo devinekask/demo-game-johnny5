@@ -1,6 +1,7 @@
 import Pablo from '../gameobjects/Pablo.js';
 import Bullet from '../gameobjects/Bullet.js';
 import Police from '../gameobjects/Police.js';
+import Civilian from '../gameobjects/Civilian.js';
 
 let pablo;
 const bullets = [];
@@ -9,6 +10,8 @@ const polices = [];
 let police;
 let score;
 let scoreTextField;
+let civilians = [];
+let rect;
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -25,11 +28,18 @@ export default class GameScene extends Phaser.Scene {
     this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
-      `sky`
+      `bg`
     );
     this.createPablo();
     this.createBullet();
     this.createScore();
+
+    rect = new Phaser.Geom.Rectangle(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height - 68,
+      1,
+      1
+    );
   }
 
   createPablo() {
@@ -62,9 +72,9 @@ export default class GameScene extends Phaser.Scene {
           this.sys.game.config.height - 100
         );
         bullets.push(this.bullet);
-        const rect = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
+        const shootPoint = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
 
-        this.physics.moveToObject(this.bullet, rect, 350);
+        this.physics.moveToObject(this.bullet, shootPoint, 350);
         this.bullet.rotation = bulletAngle + - 0.1;
       },
       this
@@ -72,9 +82,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   createScore() {
-    scoreTextField = this.add.text(16, 16, `Score: 0`, {
+    scoreTextField = this.add.text(120, 32, `0`, {
       fontSize: `32px`,
-      fill: `#000`
+      fill: `white`
     });
     score = 0;
   }
@@ -97,12 +107,6 @@ export default class GameScene extends Phaser.Scene {
     }
     polices.push(this.police);
     //
-    const rect = new Phaser.Geom.Rectangle(
-      this.sys.game.config.width / 2,
-      this.sys.game.config.height - 68,
-      1,
-      1
-    );
     //
     this.physics.moveToObject(this.police, rect, 100);
 
@@ -114,9 +118,20 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bullets, this.police, this.endPolice, null, this);
   }
 
+  createCivilian(){
+    this.civilian = new Civilian(
+      this,
+      this.sys.game.config.width,
+      this.sys.game.config.height - 68,
+    );
+    civilians.push(this.civilian);
+    this.physics.moveToObject(this.civilian, rect, 150);
+
+    this.physics.add.collider(civilians, bullets, this.gameOverScreen, null, this);
+  }
+
   gameOverScreen() {
     console.log('gameover');
-    this.physics.pause();
     this.gameOver = true;
     const overlay = this.add.graphics();
     overlay.fillStyle(0x171717, 0.5);
@@ -126,6 +141,8 @@ export default class GameScene extends Phaser.Scene {
       this.sys.game.config.width,
       this.sys.game.config.height
     );
+    this.scene.start('gameover');
+    console.log('haha');
   }
 
   endPolice(bulletSprite, policeSprite) {
@@ -133,7 +150,7 @@ export default class GameScene extends Phaser.Scene {
     policeSprite.destroy();
     bulletSprite.destroy();
     score += 10;
-    scoreTextField.setText(`Score: ${score}`);
+    scoreTextField.setText(`${score}`);
     console.log(this.score);
   }
 
@@ -142,8 +159,20 @@ export default class GameScene extends Phaser.Scene {
       this.number = Math.random();
       const numberone = Math.random();
       if (numberone < 0.02) {
-        console.log('Enemy created');
         this.createPolice(this.number);
+      }
+      if (score > 100){
+        if(numberone < 0.008){
+        this.createCivilian()
+        let timer = this.time.addEvent({
+          delay: 500,                // ms
+          //callback: callback,
+          //args: [],
+          //callbackScope: thisArg,
+          loop: true
+      });
+      console.log(timer.delay);
+      ;}
       }
       console.log(polices.length);
     }

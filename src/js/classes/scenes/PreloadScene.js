@@ -1,7 +1,10 @@
-import './../../assets/pablo.png';
-import './../../assets/bullet.png';
-import './../../assets/sky.png';
-import './../../assets/police.png';
+import './../../../assets/pablo.png';
+import './../../../assets/bullet.png';
+import './../../../assets/police.png';
+import './../../../assets/civilian.png';
+import './../../../assets/bg.png';
+import './../../../assets/gameover.png';
+
 
 export default class PreloadScene extends Phaser.Scene{
 
@@ -14,10 +17,13 @@ export default class PreloadScene extends Phaser.Scene{
     this.preloader = this.add.graphics();
     this.load.on(`progress`, this.onProgress, this);
     this.load.on(`complete`, this.onComplete, this);
-    this.load.image(`sky`, `./assets/sky.png`);
     this.load.image('bullet', 'assets/bullet.png');
     this.load.image(`pablo`, `./assets/pablo.png`);
+    this.load.image(`bg`, `./assets/bg.png`);
     this.load.image(`police`, `./assets/police.png`);
+    this.load.image(`civilian`, `./assets/civilian.png`);
+    this.load.image(`gameover_img`, `./assets/gameover.png`);
+
   }
 
   onProgress(value){

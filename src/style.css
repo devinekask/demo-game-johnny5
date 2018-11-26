@@ -14,3 +14,27 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+.overlay{
+  visibility: hidden;
+  position: absolute;
+  top:10rem;
+  z-index: 1000;
+  background-color: var(--backgroundColor);
+  left:0;
+  right:0;
+  margin-left: auto;
+  margin-right: auto;
+  width:15rem;
+}
+.overlay__nameinput{
+  width: 15rem;
+  padding:1rem;
+  border-radius: 0.8rem;
+  border:none;
+  font-size: 2rem;
+  text-align: center;
+}
+.overlay__nameinput:focus{
+  outline: none;
+}

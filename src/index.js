@@ -1,6 +1,6 @@
-import "./style.css";
-import "phaser";
-import Game from "./classes/Game.js";
+import './style.css';
+import 'phaser';
+import Game from './js/classes/Game.js';
 
 {
   const init = () => {

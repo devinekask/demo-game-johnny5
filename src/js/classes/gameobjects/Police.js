@@ -1,4 +1,4 @@
-export default class Police extends Phaser.GameObjects.Image {
+export default class Police extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, number) {
     //
     super(scene, x, y, `police`);
@@ -7,8 +7,7 @@ export default class Police extends Phaser.GameObjects.Image {
     scene.physics.add.existing(this);
     this.setScale(0.08);
     //
-    if (number < 0.5) {
-    } else {
+    if (number > 0.5) {
       this.flipX = true;
     }
   }

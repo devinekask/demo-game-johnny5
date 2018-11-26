@@ -3,11 +3,8 @@ import Bullet from '../gameobjects/Bullet.js';
 import Police from '../gameobjects/Police.js';
 import Civilian from '../gameobjects/Civilian.js';
 
-let pablo;
 const bullets = [];
-let reticle;
 const polices = [];
-let police;
 let score;
 let scoreTextField;
 let civilians = [];

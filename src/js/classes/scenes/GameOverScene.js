@@ -22,7 +22,7 @@ export default class GameOver extends Phaser.Scene {
       this.sys.game.config.height / 2,
       `gameover_img`
     );
-
+    //
     this.createScoreSubmit();
     this.input.on('pointerdown', pointer => {
       const $name = document.querySelector(`.overlay__nameinput`).value;
@@ -41,5 +41,6 @@ export default class GameOver extends Phaser.Scene {
       });
     });
   }
+
   update() {}
 }

@@ -23,6 +23,8 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
 
+    new Text(this.sys.game, this.sys.game.config.width, this.sys.game.config.height - 100, "Click anywhere to shoot!")
+
     this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,

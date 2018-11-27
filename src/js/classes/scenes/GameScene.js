@@ -146,7 +146,7 @@ export default class GameScene extends Phaser.Scene {
     polices.splice(policeSprite);
     policeSprite.destroy();
     bulletSprite.destroy();
-    score += 10;
+    score += 170;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
   }

@@ -18,8 +18,9 @@ export default class BootScene extends Phaser.Scene {
       this.sys.game.config.height / 2,
       `titlescreen`
     );
+
     this.btn = this.add.image(this.sys.game.config.width / 2, 500, `button`);
-    this.input.once(
+    this.input.on(
       'pointerdown',
       function() {
         console.log('click');

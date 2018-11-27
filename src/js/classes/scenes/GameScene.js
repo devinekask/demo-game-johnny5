@@ -51,7 +51,6 @@ export default class GameScene extends Phaser.Scene {
     this.input.on(
       'pointerdown',
       function() {
-        //this.score ++;
         const mousex = this.input.mousePointer.x;
         const mousey = this.input.mousePointer.y;
         let bulletAngle = this.pablo.rotation;

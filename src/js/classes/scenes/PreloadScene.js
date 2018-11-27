@@ -1,11 +1,3 @@
-import './../../../assets/pablo.png';
-import './../../../assets/bullet.png';
-import './../../../assets/police.png';
-import './../../../assets/civilian.png';
-import './../../../assets/bg.png';
-import './../../../assets/gameover.png';
-
-
 export default class PreloadScene extends Phaser.Scene{
 
   constructor(){

@@ -2,7 +2,6 @@ import { getScores } from '../../functions/scores';
 import './../../../assets/HighscoreScreen.png';
 import './../../../assets/btn_again.png';
 
-
 export default class HighScores extends Phaser.Scene {
   constructor() {
     super({

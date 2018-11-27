@@ -22,8 +22,17 @@ export default class GameOver extends Phaser.Scene {
       this.sys.game.config.height / 2,
       `gameover_img`
     );
+
+    this.name = this.add.text(this.sys.game.config.width / 2 - 120, 450, `0`, {
+      fontSize: `40px`,
+      fill: `white`
+    });
+    this.name.setText(`Your Name`);
+    this.name.setShadow(0, 0, `black`, 15);
+
     //
     this.createScoreSubmit();
+
     this.input.on('pointerdown', pointer => {
       const $name = document.querySelector(`.overlay__nameinput`).value;
       //Send score to backend
@@ -41,6 +50,5 @@ export default class GameOver extends Phaser.Scene {
       });
     });
   }
-
   update() {}
 }

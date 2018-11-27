@@ -1,7 +1,4 @@
 import { getScores } from '../../functions/scores';
-import './../../../assets/HighscoreScreen.png';
-import './../../../assets/btn_again.png';
-
 
 export default class HighScores extends Phaser.Scene {
   constructor() {
@@ -23,7 +20,6 @@ export default class HighScores extends Phaser.Scene {
     getScores().then(data => {
       this.createcreateScoreFields(data);
     });
-
     this.btn = this.add.image(this.sys.game.config.width / 2, 500, `button_again`);
     this.input.once(
       'pointerdown',

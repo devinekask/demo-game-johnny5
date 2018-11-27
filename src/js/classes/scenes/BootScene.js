@@ -10,7 +10,6 @@ export default class BootScene extends Phaser.Scene {
     this.load.image(`button`, `./assets/btn.png`);
   }
   create() {
-
     this.bg = this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
@@ -22,12 +21,10 @@ export default class BootScene extends Phaser.Scene {
       'pointerdown',
       function() {
         console.log('click');
-
         this.scene.start('preload');
       },
       this
     );
   }
-
   update() {}
 }

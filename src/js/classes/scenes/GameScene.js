@@ -10,6 +10,8 @@ let scoreTextField;
 let civilians = [];
 let rect;
 
+let timedEvent;
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({
@@ -23,7 +25,6 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
 
-    new Text(this.sys.game, this.sys.game.config.width, this.sys.game.config.height - 100, "Click anywhere to shoot!")
 
     this.add.image(
       this.sys.game.config.width / 2,
@@ -40,8 +41,17 @@ export default class GameScene extends Phaser.Scene {
       1,
       1
     );
+
+    this.instructies = this.add.text(this.sys.game.config.width / 2-270, 300, `0`, {
+      fontSize: `24px`,
+      fill: `white`
+    });
+
+    this.instructies.setText(`Click anywhere on the screen to shoot!`);
   }
 
+
+// Roep Pablo op
   createPablo() {
     this.pablo = new Pablo(
       this,
@@ -49,12 +59,12 @@ export default class GameScene extends Phaser.Scene {
       this.sys.game.config.height
     );
   }
-
+// Maak bullet aan
   createBullet() {
     this.input.on(
       'pointerdown',
       function() {
-        //this.score ++;
+        this.instructies.destroy();
         const mousex = this.input.mousePointer.x;
         const mousey = this.input.mousePointer.y;
         let bulletAngle = this.pablo.rotation;
@@ -77,8 +87,7 @@ export default class GameScene extends Phaser.Scene {
         this.physics.moveToObject(this.bullet, shootPoint, 350);
         this.bullet.rotation = bulletAngle + - 0.1;
 
-
-    const shot = this.sound.add('shot');
+        const shot = this.sound.add('shot');
 
         shot.play();
       },
@@ -93,7 +102,7 @@ export default class GameScene extends Phaser.Scene {
     });
     score = 0;
   }
-
+// Roep police op
   createPolice(number) {
     if (this.number < 0.5) {
       this.police = new Police(
@@ -113,8 +122,7 @@ export default class GameScene extends Phaser.Scene {
 
     // this.scene.anims.play(`walk`,true);
     polices.push(this.police);
-    //
-    //
+
     this.physics.moveToObject(this.police, rect, 100);
 
     this.physics.add.collider(
@@ -124,7 +132,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.physics.add.collider(bullets, this.police, this.endPolice, null, this);
   }
-
+// Roep burger op
   createCivilian(){
     this.civilian = new Civilian(
       this,
@@ -150,9 +158,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.scene.start('gameover');
     console.log('haha');
-
     const burgerscream = this.sound.add('burgerscream');
-
     burgerscream.play();
   }
 
@@ -163,10 +169,8 @@ export default class GameScene extends Phaser.Scene {
     score += 10;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
-
     const poposcream = this.sound.add('poposcream');
-
-      poposcream.play();
+    poposcream.play();
   }
 
   update() {
@@ -178,14 +182,7 @@ export default class GameScene extends Phaser.Scene {
       }
       if (score > 100){
         if(numberone < 0.008){
-        this.createCivilian()
-        let timer = this.time.addEvent({
-          delay: 500,                // ms
-          //callback: callback,
-          //args: [],
-          //callbackScope: thisArg,
-          loop: true
-      });
+        this.createCivilian();
       console.log(timer.delay);
       ;}
       }

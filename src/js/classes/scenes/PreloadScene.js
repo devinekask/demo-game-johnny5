@@ -37,9 +37,7 @@ export default class PreloadScene extends Phaser.Scene{
 
     // MUSIC
     const menu = this.sound.add('menu');
-
     menu.play();
-
     this.preloader.destroy();
     this.scene.start(`game`);
   }

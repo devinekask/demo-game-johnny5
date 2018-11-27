@@ -22,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {}
 
   create() {
+
     this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
@@ -38,7 +39,7 @@ export default class GameScene extends Phaser.Scene {
       1
     );
   }
-
+// Roep Pablo op
   createPablo() {
     this.pablo = new Pablo(
       this,
@@ -46,7 +47,7 @@ export default class GameScene extends Phaser.Scene {
       this.sys.game.config.height
     );
   }
-
+// Maak bullet aan
   createBullet() {
     this.input.on(
       'pointerdown',
@@ -72,6 +73,10 @@ export default class GameScene extends Phaser.Scene {
 
         this.physics.moveToObject(this.bullet, shootPoint, 350);
         this.bullet.rotation = bulletAngle + - 0.1;
+
+        const shot = this.sound.add('shot');
+
+        shot.play();
       },
       this
     );
@@ -84,7 +89,7 @@ export default class GameScene extends Phaser.Scene {
     });
     score = 0;
   }
-
+// Roep police op
   createPolice(number) {
     if (this.number < 0.5) {
       this.police = new Police(
@@ -101,9 +106,10 @@ export default class GameScene extends Phaser.Scene {
         this.number
       );
     }
+
+    // this.scene.anims.play(`walk`,true);
     polices.push(this.police);
-    //
-    //
+
     this.physics.moveToObject(this.police, rect, 100);
 
     this.physics.add.collider(
@@ -113,7 +119,7 @@ export default class GameScene extends Phaser.Scene {
     );
     this.physics.add.collider(bullets, this.police, this.endPolice, null, this);
   }
-
+// Roep burger op
   createCivilian(){
     this.civilian = new Civilian(
       this,
@@ -126,6 +132,23 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(civilians, bullets, this.gameOverScreen, null, this);
   }
 
+  gameOverScreen() {
+    console.log('gameover');
+    this.gameOver = true;
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x171717, 0.5);
+    overlay.fillRect(
+      0,
+      0,
+      this.sys.game.config.width,
+      this.sys.game.config.height
+    );
+    this.scene.start('gameover');
+    console.log('haha');
+    const burgerscream = this.sound.add('burgerscream');
+    burgerscream.play();
+  }
+
   endPolice(bulletSprite, policeSprite) {
     polices.splice(policeSprite);
     policeSprite.destroy();
@@ -133,6 +156,8 @@ export default class GameScene extends Phaser.Scene {
     score += 10;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
+    const poposcream = this.sound.add('poposcream');
+    poposcream.play();
   }
 
   update() {
@@ -144,14 +169,7 @@ export default class GameScene extends Phaser.Scene {
       }
       if (score > 100){
         if(numberone < 0.008){
-        this.createCivilian()
-        let timer = this.time.addEvent({
-          delay: 500,                // ms
-          //callback: callback,
-          //args: [],
-          //callbackScope: thisArg,
-          loop: true
-      });
+        this.createCivilian();
       console.log(timer.delay);
       ;}
       }

@@ -23,7 +23,7 @@ module.exports = (env, {mode}) => {
           }
         },
         {
-          test: /\.(jpe?g|png|svg|webp)$/,
+          test: /\.(jpe?g|png|svg|webp|mp3|ogg)$/,
           use: {
             loader: 'file-loader',
             options: {

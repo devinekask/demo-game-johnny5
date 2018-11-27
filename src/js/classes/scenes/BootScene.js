@@ -1,6 +1,3 @@
-import './../../../assets/btn.png';
-import './../../../assets/titlescreen.png';
-
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super({
@@ -24,12 +21,10 @@ export default class BootScene extends Phaser.Scene {
       'pointerdown',
       function() {
         console.log('click');
-
         this.scene.start('preload');
       },
       this
     );
   }
-
   update() {}
 }

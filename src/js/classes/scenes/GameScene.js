@@ -18,7 +18,7 @@ export default class GameScene extends Phaser.Scene {
   }
   init() {
     this.gameOver = false;
-  }
+    }
   preload() {}
 
   create() {
@@ -127,26 +127,11 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(civilians, bullets, this.gameOverScreen, null, this);
   }
 
-  gameOverScreen() {
-    console.log('gameover');
-    this.gameOver = true;
-    const overlay = this.add.graphics();
-    overlay.fillStyle(0x171717, 0.5);
-    overlay.fillRect(
-      0,
-      0,
-      this.sys.game.config.width,
-      this.sys.game.config.height
-    );
-    this.scene.start('gameover');
-    console.log('haha');
-  }
-
   endPolice(bulletSprite, policeSprite) {
     polices.splice(policeSprite);
     policeSprite.destroy();
     bulletSprite.destroy();
-    score += 170;
+    score += 10;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
   }
@@ -173,5 +158,19 @@ export default class GameScene extends Phaser.Scene {
       }
       console.log(polices.length);
     }
+  }
+
+  gameOverScreen() {
+    console.log('gameover');
+    this.gameOver = true;
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x171717, 0.5);
+    overlay.fillRect(
+      0,
+      0,
+      this.sys.game.config.width,
+      this.sys.game.config.height
+    );
+    this.scene.start('gameover', {gamescore: score});
   }
 }

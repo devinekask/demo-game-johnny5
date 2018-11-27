@@ -6,8 +6,8 @@ export default class GameOver extends Phaser.Scene {
       key: 'gameover'
     });
   }
-  init() {
-    this.score = Phaser.Math.Between(100, 500);
+  init(data) {
+    this.score = data.gamescore;
   }
   preload() {}
   createScoreSubmit() {

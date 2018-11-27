@@ -22,6 +22,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {}
 
   create() {
+
     this.add.image(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
@@ -73,6 +74,11 @@ export default class GameScene extends Phaser.Scene {
 
         this.physics.moveToObject(this.bullet, shootPoint, 350);
         this.bullet.rotation = bulletAngle + - 0.1;
+
+
+    const shot = this.sound.add('shot');
+
+        shot.play();
       },
       this
     );
@@ -102,6 +108,8 @@ export default class GameScene extends Phaser.Scene {
         this.number
       );
     }
+
+    // this.scene.anims.play(`walk`,true);
     polices.push(this.police);
     //
     //
@@ -140,15 +148,23 @@ export default class GameScene extends Phaser.Scene {
     );
     this.scene.start('gameover');
     console.log('haha');
+
+    const burgerscream = this.sound.add('burgerscream');
+
+    burgerscream.play();
   }
 
   endPolice(bulletSprite, policeSprite) {
     polices.splice(policeSprite);
     policeSprite.destroy();
     bulletSprite.destroy();
-    score += 170;
+    score += 10;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
+
+    const poposcream = this.sound.add('poposcream');
+
+      poposcream.play();
   }
 
   update() {

@@ -1,11 +1,3 @@
-import './../../../assets/pablo.png';
-import './../../../assets/bullet.png';
-import './../../../assets/police.png';
-import './../../../assets/civilian.png';
-import './../../../assets/bg.png';
-import './../../../assets/gameover.png';
-
-
 export default class PreloadScene extends Phaser.Scene{
 
   constructor(){
@@ -20,9 +12,17 @@ export default class PreloadScene extends Phaser.Scene{
     this.load.image('bullet', 'assets/bullet.png');
     this.load.image(`pablo`, `./assets/pablo.png`);
     this.load.image(`bg`, `./assets/bg.png`);
-    this.load.image(`police`, `./assets/police.png`);
     this.load.image(`civilian`, `./assets/civilian.png`);
     this.load.image(`gameover_img`, `./assets/gameover.png`);
+
+
+    this.load.spritesheet(`police`,`./assets/sprites/police.png`,{frameWidth:82, frameHeight:101});
+
+    // MUSIC
+    this.load.audio('menu', './assets/audio/menu.mp3');
+    this.load.audio('shot', './assets/audio/shot.mp3');
+    this.load.audio('poposcream', './assets/audio/poposcream.mp3');
+    this.load.audio('burgerscream', './assets/audio/burgerscream.mp3');
 
   }
 
@@ -34,6 +34,12 @@ export default class PreloadScene extends Phaser.Scene{
   }
 
   onComplete(){
+
+    // MUSIC
+    const menu = this.sound.add('menu');
+
+    menu.play();
+
     this.preloader.destroy();
     this.scene.start(`game`);
   }

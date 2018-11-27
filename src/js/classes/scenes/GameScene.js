@@ -18,10 +18,12 @@ export default class GameScene extends Phaser.Scene {
   }
   init() {
     this.gameOver = false;
-  }
+    }
   preload() {}
 
   create() {
+
+    new Text(this.sys.game, this.sys.game.config.width, this.sys.game.config.height - 100, "Click anywhere to shoot!")
 
     this.add.image(
       this.sys.game.config.width / 2,
@@ -189,5 +191,19 @@ export default class GameScene extends Phaser.Scene {
       }
       console.log(polices.length);
     }
+  }
+
+  gameOverScreen() {
+    console.log('gameover');
+    this.gameOver = true;
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x171717, 0.5);
+    overlay.fillRect(
+      0,
+      0,
+      this.sys.game.config.width,
+      this.sys.game.config.height
+    );
+    this.scene.start('gameover', {gamescore: score});
   }
 }

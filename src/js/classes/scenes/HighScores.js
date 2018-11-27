@@ -37,10 +37,10 @@ export default class HighScores extends Phaser.Scene {
   }
   createcreateScoreFields(data) {
     const x = this.sys.game.config.width / 2;
-    let y = 100;
+    let y = 190;
     data.forEach(player => {
       this.add
-        .text(x, y, `${player.name} - ${player.score}`, { color: `#ffffff` })
+        .text(x, y, `${player.name} - ${player.score}`, { color: `#ffffff`, fontSize: `16px`})
         .setOrigin(0.5, 0.5);
       y += 20;
     });

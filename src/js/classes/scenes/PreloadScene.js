@@ -13,10 +13,9 @@ export default class PreloadScene extends Phaser.Scene{
     this.load.image(`pablo`, `./assets/pablo.png`);
     this.load.image(`bg`, `./assets/bg.png`);
     this.load.image(`civilian`, `./assets/civilian.png`);
+    this.load.image(`police`, `./assets/police.png`);
     this.load.image(`gameover_img`, `./assets/gameover.png`);
 
-
-    this.load.spritesheet(`police`,`./assets/sprites/police.png`,{frameWidth:82, frameHeight:101});
 
     // MUSIC
     this.load.audio('menu', './assets/audio/menu.mp3');

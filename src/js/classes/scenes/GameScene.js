@@ -109,8 +109,6 @@ export default class GameScene extends Phaser.Scene {
         this.sys.game.config.height - 68,
         this.number
       );
-    this.police.anims.play(`walk`,true);
-    console.log('hey, new officer in town');
     } else {
       this.police = new Police(
         this,
@@ -118,8 +116,6 @@ export default class GameScene extends Phaser.Scene {
         this.sys.game.config.height - 68,
         this.number
       );
-    this.police.anims.play(`walk`,true);
-    console.log('hey, new officer in town');
     }
     polices.push(this.police);
 
@@ -164,7 +160,6 @@ export default class GameScene extends Phaser.Scene {
 
     this.gameOver = true;
     this.scene.start('gameover');
-    const burgerscream = this.sound.add('burgerscream');
     burgerscream.play();
   }
 

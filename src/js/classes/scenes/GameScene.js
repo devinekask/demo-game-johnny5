@@ -10,8 +10,6 @@ let scoreTextField;
 let civilians = [];
 let rect;
 
-let timedEvent;
-
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super({
@@ -85,9 +83,9 @@ export default class GameScene extends Phaser.Scene {
         const shootPoint = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
 
         this.physics.moveToObject(this.bullet, shootPoint, 350);
-        this.bullet.rotation = bulletAngle + - 0.1;
+        this.bullet.rotation = bulletAngle + - 1.8;
 
-        const shot = this.sound.add('shot');
+        const shot = this.sound.add('shot', {volume: 0.4});
 
         shot.play();
       },
@@ -111,6 +109,8 @@ export default class GameScene extends Phaser.Scene {
         this.sys.game.config.height - 68,
         this.number
       );
+    this.police.anims.play(`walk`,true);
+    console.log('hey, new officer in town');
     } else {
       this.police = new Police(
         this,
@@ -118,9 +118,9 @@ export default class GameScene extends Phaser.Scene {
         this.sys.game.config.height - 68,
         this.number
       );
+    this.police.anims.play(`walk`,true);
+    console.log('hey, new officer in town');
     }
-
-    // this.scene.anims.play(`walk`,true);
     polices.push(this.police);
 
     this.physics.moveToObject(this.police, rect, 100);
@@ -146,20 +146,14 @@ export default class GameScene extends Phaser.Scene {
   }
 
   gameOverScreen() {
-    console.log('gameover');
-    this.gameOver = true;
-    const overlay = this.add.graphics();
-    overlay.fillStyle(0x171717, 0.5);
-    overlay.fillRect(
-      0,
-      0,
-      this.sys.game.config.width,
-      this.sys.game.config.height
-    );
-    this.scene.start('gameover');
-    console.log('haha');
-    const burgerscream = this.sound.add('burgerscream');
+
+    const burgerscream = this.sound.add('burgerscream', {volume: 0.2});
     burgerscream.play();
+
+    console.log('gameover');
+
+    this.gameOver = true;
+    this.scene.start('gameover');
   }
 
   endPolice(bulletSprite, policeSprite) {
@@ -169,7 +163,7 @@ export default class GameScene extends Phaser.Scene {
     score += 10;
     scoreTextField.setText(`${score}`);
     console.log(this.score);
-    const poposcream = this.sound.add('poposcream');
+    const poposcream = this.sound.add('poposcream', {volume: 0.2});
     poposcream.play();
   }
 
@@ -183,7 +177,6 @@ export default class GameScene extends Phaser.Scene {
       if (score > 100){
         if(numberone < 0.008){
         this.createCivilian();
-      console.log(timer.delay);
       ;}
       }
       console.log(polices.length);

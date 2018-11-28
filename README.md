@@ -32,3 +32,8 @@ Er komen vierkanten langs beide kanten op het canvas, op willekeurige momenten, 
 Wanneer de kogels de vierkanten raken, verdwijnen de vierkanten. 
 
 Wanneer de vierkanten de cirkel raken, is het spel afgelopen.
+
+
+## ONLINE
+
+www.louisheeren.be/pabloescobar

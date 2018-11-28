@@ -79,7 +79,7 @@ export default class GameScene extends Phaser.Scene {
         this.bullet = new Bullet(
           this,
           this.sys.game.config.width / 2,
-          this.sys.game.config.height - 100
+          this.sys.game.config.height - 180
         );
         bullets.push(this.bullet);
         const shootPoint = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
@@ -133,12 +133,22 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(bullets, this.police, this.endPolice, null, this);
   }
 // Roep burger op
-  createCivilian(){
+  createCivilian(number){
+    if (this.number < 0.5) {
     this.civilian = new Civilian(
       this,
-      this.sys.game.config.width,
+      0,
       this.sys.game.config.height - 68,
+      this.number
     );
+    } else {
+      this.civilian = new Civilian(
+        this,
+        this.sys.game.config.width,
+        this.sys.game.config.height - 68,
+        this.number
+      );
+    }
     civilians.push(this.civilian);
     this.physics.moveToObject(this.civilian, rect, 150);
 
@@ -157,7 +167,6 @@ export default class GameScene extends Phaser.Scene {
       this.sys.game.config.height
     );
     this.scene.start('gameover');
-    console.log('haha');
     const burgerscream = this.sound.add('burgerscream');
     burgerscream.play();
   }
@@ -180,11 +189,19 @@ export default class GameScene extends Phaser.Scene {
       if (numberone < 0.02) {
         this.createPolice(this.number);
       }
-      if (score > 100){
+      if (score > 800){
+        if(numberone < 0.02){
+          this.createCivilian(this.number);
+          console.log('burger');
+        } } else if (score > 400){
         if(numberone < 0.008){
-        this.createCivilian();
-      console.log(timer.delay);
-      ;}
+          this.createCivilian(this.number);
+          console.log('burger');
+        }} else if (score > 100){
+        if(numberone < 0.001){
+        this.createCivilian(this.number);
+        console.log('burger');
+        };
       }
       console.log(polices.length);
     }

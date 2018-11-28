@@ -18,6 +18,7 @@ export default class PreloadScene extends Phaser.Scene{
       frameHeight: 101
     });
     this.load.image(`gameover_img`, `./assets/gameover.png`);
+    //this.load.spritesheet(`pablo`, `./assets/pablo2.png`, {frameWidth: 100, frameHeight: 100});
 
 
     // MUSIC

@@ -5,5 +5,13 @@ export default class Pablo extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
     this.setScale(0.08);
     this.setCollideWorldBounds(true);
+    this.createAnimations();
+  }
+  createAnimations() {
+    this.scene.anims.create({
+      key: `still`,
+      frames: [{key: `pablo`, frames: 1}],
+      frameRate: 20
+    });
   }
 }

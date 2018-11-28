@@ -164,11 +164,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.gameOver = true;
     this.scene.start('gameover');
-<<<<<<< HEAD
     const burgerscream = this.sound.add('burgerscream');
     burgerscream.play();
-=======
->>>>>>> 85699ed0cd6e5b8e29c2113d49e4f1b87341a953
   }
 
   endPolice(bulletSprite, policeSprite) {
@@ -195,7 +192,6 @@ export default class GameScene extends Phaser.Scene {
           console.log('burger');
         } } else if (score > 400){
         if(numberone < 0.008){
-<<<<<<< HEAD
           this.createCivilian(this.number);
           console.log('burger');
         }} else if (score > 100){
@@ -203,10 +199,6 @@ export default class GameScene extends Phaser.Scene {
         this.createCivilian(this.number);
         console.log('burger');
         };
-=======
-        this.createCivilian();
-      ;}
->>>>>>> 85699ed0cd6e5b8e29c2113d49e4f1b87341a953
       }
       console.log(polices.length);
     }

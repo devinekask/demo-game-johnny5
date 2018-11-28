@@ -127,7 +127,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(
       this.pablo,
-      polices,
+      this.police,
       this.gameOverScreen,null,this
     );
     this.physics.add.collider(bullets, this.police, this.endPolice, null, this);

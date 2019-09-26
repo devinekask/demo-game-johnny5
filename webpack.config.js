@@ -1,7 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = (env, {mode}) => {
   console.log(mode);
@@ -11,7 +13,8 @@ module.exports = (env, {mode}) => {
     },
     devServer: {
       overlay: true,
-      hot: true
+      hot: true,
+      contentBase: path.join(__dirname, 'src'),
     },
     module: {
       rules: [
@@ -58,6 +61,9 @@ module.exports = (env, {mode}) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: 'style.css'
+      }),
+      new HtmlWebpackPlugin({
+        template: 'src/index.html'
       }),
       new OptimizeCSSAssetsPlugin(),
       new webpack.HotModuleReplacementPlugin()

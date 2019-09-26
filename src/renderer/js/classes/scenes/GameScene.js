@@ -59,38 +59,35 @@ export default class GameScene extends Phaser.Scene {
   }
 // Maak bullet aan
   createBullet() {
-    this.input.on(
-      'pointerdown',
-      function() {
-        this.instructies.destroy();
-        const mousex = this.input.mousePointer.x;
-        const mousey = this.input.mousePointer.y;
-        let bulletAngle = this.pablo.rotation;
+    this.onButtonPress = () => {
+      this.instructies.destroy();
+      const mousex = this.input.mousePointer.x;
+      const mousey = this.input.mousePointer.y;
+      let bulletAngle = this.pablo.rotation;
 
-        bulletAngle = Phaser.Math.Angle.Between(
-          this.sys.game.config.width / 2,
-          this.sys.game.config.height / 2,
-          mousex,
-          mousey
-        );
+      bulletAngle = Phaser.Math.Angle.Between(
+        this.sys.game.config.width / 2,
+        this.sys.game.config.height / 2,
+        mousex,
+        mousey
+      );
 
-        this.bullet = new Bullet(
-          this,
-          this.sys.game.config.width / 2,
-          this.sys.game.config.height - 180
-        );
-        bullets.push(this.bullet);
-        const shootPoint = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
+      this.bullet = new Bullet(
+        this,
+        this.sys.game.config.width / 2,
+        this.sys.game.config.height - 180
+      );
+      bullets.push(this.bullet);
+      const shootPoint = new Phaser.Geom.Rectangle(mousex, mousey, 1, 1);
 
-        this.physics.moveToObject(this.bullet, shootPoint, 350);
-        this.bullet.rotation = bulletAngle + - 1.8;
+      this.physics.moveToObject(this.bullet, shootPoint, 350);
+      this.bullet.rotation = bulletAngle + - 1.8;
 
-        const shot = this.sound.add('shot', {volume: 0.4});
+      const shot = this.sound.add('shot', {volume: 0.4});
 
-        shot.play();
-      },
-      this
-    );
+      shot.play();
+    };
+    window.game.button.on('press', this.onButtonPress);
   }
 
   createScore() {
@@ -201,6 +198,8 @@ export default class GameScene extends Phaser.Scene {
 
   gameOverScreen() {
     console.log('gameover');
+    window.game.button.off('press', this.onButtonPress);
+    
     this.gameOver = true;
     const overlay = this.add.graphics();
     overlay.fillStyle(0x171717, 0.5);
